@@ -68,7 +68,6 @@ document.querySelector('.menu-toggle').addEventListener('click', e => {
  document.querySelector('nav').classList.toggle('open', !expanded);
 });
 window.addEventListener('hashchange', render);
-document.querySelector('#year').textContent = new Date().getFullYear();
 
 const dialog = document.querySelector('dialog');
 const formTitles = { contact: 'Let’s connect.', booking: 'Bring joy to your community.', chapter: 'Start something meaningful.', crew: 'Find your rhythm. Join our crew.' };
