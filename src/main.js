@@ -1,3 +1,4 @@
+import '@fontsource/lemon/latin-400.css';
 import '@fontsource/nunito/latin-400.css';
 import '@fontsource/nunito/latin-600.css';
 import '@fontsource/nunito/latin-700.css';
@@ -16,9 +17,8 @@ const cta = () => `<section class="cta section-wrap"><div><p class="eyebrow">LET
 
 function about() {
  return `<section class="home-heading"><div class="hero section-wrap">
-  <div class="hero-copy"><h1>Bringing Joy to Seniors Through Dance Performances</h1><p>High school dancers share the gift of movement with our community's seniors.</p><div class="hero-actions">${button('Book a Performance', 'booking')}<a class="button button-outline" href="#join">Join Our Crew ${arrow}</a></div></div>
-  <div class="hero-art"><div class="photo-frame"><img src="/images/dance.jpeg" alt="Dancers moving together in a bright studio, from the Silver Steps brand guide" fetchpriority="high" /><div class="photo-label"><span aria-hidden="true">✦</span> MADE TO MOVE.<br /><span class="label-second">HERE TO CONNECT.</span></div></div><div class="round-seal" aria-label="Dance with purpose, make an impact">DANCE WITH<br /><b>✦</b><br />PURPOSE</div><span class="art-star" aria-hidden="true">✦</span><div class="art-caption"><span>01 /</span> Good energy. Shared with everyone.</div></div>
- </div></section>${band()}
+  <div class="hero-copy"><h1><span>Bringing Joy to Seniors</span> <span>Through Dance</span> <span>Performances</span></h1><p>High school dancers share the gift of movement with our community's seniors.</p><div class="hero-actions"><button class="button hero-button" data-form="booking">Book a Performance</button><a class="button hero-button" href="#join">Join Our Crew</a></div></div>
+ </div></section>
  <section id="founder" class="founder section-wrap"><div class="founder-art">${founderPhoto ? `<img class="founder-photo" src="${esc(founderPhoto)}" alt="Guneet Kapur, founder of Silver Steps" />` : `<div class="founder-placeholder"><span class="founder-monogram">GK</span><span>Founder portrait coming soon</span><span class="portrait-star" aria-hidden="true">✦</span></div>`}<div class="founder-tag"><strong>Guneet Kapur</strong><span>FOUNDER & DANCER</span></div></div><div class="founder-copy"><p class="eyebrow">MEET THE FOUNDER</p><h2>Hi, I’m Guneet Kapur</h2><p>I’m a senior at Millburn High School in Millburn, New Jersey, and dance has been a huge part of my life for the past eight years. In my freshman year, I started teaching my own dance classes to children, which taught me how powerful dance can be in bringing people together and spreading happiness.</p><p>I’m passionate about giving back to my community, and in my sophomore year, I noticed that seniors in our local centers often miss out on dynamic, engaging entertainment. That’s why I created Silver Steps, to bring the joy of dance to community members who deserve to feel seen, valued, and celebrated.</p><p>Leading this crew has been one of the most rewarding experiences of my life, and I can’t wait to continue growing our impact across New Jersey.</p></div></section>
  <section class="purpose"><div class="section-wrap purpose-inner purpose-story"><div><h2>Why Silver Steps Exists</h2><p>We believe that everyone in our community, especially our seniors, deserves access to moments of joy, connection, and excitement. Silver Steps was created to bridge the gap between generations and show that young people genuinely care about uplifting the older members of our community through the universal language of dance. Every performance is our way of honoring the seniors who built the world we live in today.</p></div><img class="purpose-photo" src="https://images.squarespace-cdn.com/content/v1/692a12959fd6b8144bc97d66/918fc5b4-d4bb-4739-8ff7-340dc6d14ec2/silver-steps_intergenerational-group-laughing-outdoors-park.jpg" alt="A diverse group of people sitting together outdoors and laughing on a sunny day" loading="lazy" /></div></section>
  <section class="dance-styles section-wrap" aria-labelledby="styles-title"><div class="home-section-heading"><p class="eyebrow">Our Dance Styles</p><h2 id="styles-title">Three Styles, One Mission</h2></div><div class="home-section-copy"><div class="style-tags" aria-label="Our three dance styles"><span>Bollywood</span><span>Hip-Hop</span><span>K-Pop</span></div><p>Every performance is a celebration of movement and culture. Our Bollywood dancers bring vibrant energy and storytelling through expressive hand gestures and footwork. Our Hip-Hop crew delivers dynamic, high-energy routines that get everyone moving. And our K-Pop performers showcase synchronized choreography with infectious enthusiasm. No matter which style, every performance is designed to entertain, uplift, and bring smiles to our senior audience.</p></div></section>
@@ -56,6 +56,7 @@ function render() {
 }
 function showPage(page) {
  currentPage = page;
+ document.body.classList.toggle('home-page', page === 'about');
  main.innerHTML = pages[page]();
  document.title = `${{ about: 'About', team: 'Our Team', community: 'Community', join: 'Join the Crew' }[page]} — Silver Steps Dance Crew`;
  document.querySelectorAll('nav a').forEach(a => {
@@ -63,6 +64,7 @@ function showPage(page) {
  });
  closeMenu();
  window.scrollTo({ top: 0, behavior: 'instant' });
+ updateHeader();
 }
 function closeMenu() { document.querySelector('.menu-toggle').setAttribute('aria-expanded', 'false'); document.querySelector('nav').classList.remove('open'); }
 document.querySelector('.menu-toggle').addEventListener('click', e => {
@@ -106,4 +108,7 @@ dialog.addEventListener('submit', e => {
   form.querySelector('.form-status').textContent = 'Your inquiry draft has been downloaded. It has not been submitted; please keep it until our contact destination is available.';
  }
 });
+function updateHeader() { document.querySelector('.site-header').classList.toggle('is-scrolled', window.scrollY > 30); }
+window.addEventListener('scroll', updateHeader, { passive: true });
 render();
+updateHeader();

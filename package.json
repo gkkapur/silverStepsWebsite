@@ -9,6 +9,7 @@
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@fontsource/lemon": "5.3.0",
     "@fontsource/nunito": "5.2.7"
   },
   "devDependencies": {
